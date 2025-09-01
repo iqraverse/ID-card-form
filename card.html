@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your ID Card</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #e8f0fe;
+    }
+    .id-card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      text-align: center;
+      width: 300px;
+      border: 2px solid #007BFF;
+    }
+    .id-card h3 {
+      color: #007BFF;
+      margin-bottom: 10px;
+    }
+    .id-card img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 2px solid #007BFF;
+      margin-bottom: 10px;
+    }
+    .qr {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="id-card">
+  <h3>Student ID Card</h3>
+  <img id="outPhoto" src="" alt="ID Photo">
+  <p><b>Name:</b> <span id="outName"></span></p>
+  <p><b>Father's Name:</b> <span id="outFather"></span></p>
+  <p><b>ID:</b> <span id="outId"></span></p>
+  <p><b>Course:</b> <span id="outCourse"></span></p>
+  <div class="qr">
+    <img id="qrCode" src="" alt="QR Code">
+  </div>
+</div>
+
+<script>
+const name = localStorage.getItem("name");
+const father = localStorage.getItem("father");
+const course = localStorage.getItem("course");
+const id = localStorage.getItem("id");
+const photo = localStorage.getItem("photo");
+
+document.getElementById("outName").innerText = name;
+document.getElementById("outFather").innerText = father;
+document.getElementById("outCourse").innerText = course;
+document.getElementById("outId").innerText = id;
+document.getElementById("outPhoto").src = photo;
+
+// \
+const qrData = `Name: ${name}\nFather: ${father}\nID: ${id}\nCourse: ${course}`;
+document.getElementById("qrCode").src = 
+  "https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=" + encodeURIComponent(qrData);
+</script>
+
+</body>
+</html>
